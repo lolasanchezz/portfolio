@@ -1,0 +1,27 @@
+[
+    {
+         "shortname": "sec",
+         "name": "graph the sec",
+         "links": {
+            "gh": "link",
+            "demo": "link"
+         },
+         "images": [
+            {
+                "src": "landing.png",
+                "subtitle": "home page"
+            },
+            {
+                "src": "mtnsearch.png",
+                "subtitle": "searching for company with ticker MTN's data"
+            },
+             {
+                "src": "mtnsearch.png",
+                "subtitle": "searching for company with ticker MTN's data"
+            }
+         ],
+         "text": [
+            {"header": "overview", "body": "hello"}
+         ]
+    }
+]

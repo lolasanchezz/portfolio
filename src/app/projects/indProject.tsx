@@ -1,6 +1,7 @@
 import styles from './indProject.module.css'
 import Image from 'next/image'
 import {useState, useEffect} from 'react'
+import projData from './projects.json'
 const Header = (props: {name: string, gh: string, demo: string, backFunc: any}) => {
     return (
         <div className = {styles.headerCont}>
@@ -41,8 +42,13 @@ const Imgwsub = (props: {src: string, sub: string, width: number, asp: number}) 
     )
 }
 
-const textBlock = (props: {header: string, text: string}) => {
-
+const TextBlock = (props: {header: string, text: string}) => {
+return (
+    <div className = {styles.textBlock}>
+        <h2>{props.header}</h2>
+        <p>{props.text}</p>
+    </div>
+)
 }
 
 
@@ -57,8 +63,45 @@ export const SecProject = (props: {goBackFunc: any}) => {
                 <Imgwsub asp={0.8} width={0.25} src = 'sec/search.png' sub="searching for Vail Inc (MTN)'s data"/>
                 <Imgwsub asp={0.8} width={0.25} src = 'sec/mtnsearch.png' sub="the results!"/>
             </div>
-        
+        <div className = {styles.textBlockCont}>
+        <TextBlock header = "overview" text = 
+        "A website to look at "
+        ></TextBlock> 
         </div>
+        </div>
+    )
+}
+
+
+
+export const IndProject = (props: {goBackFunc: any, name: string}) => {
+    let data;
+    for (let object of projData) {
+        if (object.shortname == props.name) {
+            data = object
+            break
+        }
+    }
+    console.log(data)
+    return (
+       
+        <div className = {styles.projContainer}>
+            {data? (
+                <>          
+                <Header backFunc = {props.goBackFunc} name={data!.name} gh="link" demo="link"/>
+            <div className = {styles.imagesCont}>
+                <Imgwsub asp={1} width={0.25} src = 'sec/landing.png' sub="landing page"/>
+                <Imgwsub asp={0.8} width={0.25} src = 'sec/search.png' sub="searching for Vail Inc (MTN)'s data"/>
+                <Imgwsub asp={0.8} width={0.25} src = 'sec/mtnsearch.png' sub="the results!"/>
+            </div>
+        <div className = {styles.textBlockCont}>
+        <TextBlock header = "overview" text = 
+        "A website to look at "
+        ></TextBlock> 
+        </div>
+        </>): <p>loading...</p>}
+        </div>
+        
     )
 }
 

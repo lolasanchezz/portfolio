@@ -3,7 +3,7 @@ import styles from "./projects.module.css";
 import Sphere from "../three-scrips/Sphere";
 import { ReactElement, useState } from "react";
 import { JSX } from "react/jsx-runtime";
-import { SecProject, SecondProject } from "./indProject";
+import { IndProject, SecondProject } from "./indProject";
 
 export default function Projects() {
  
@@ -53,7 +53,7 @@ export default function Projects() {
               index={2}
               projName="graph the sec"
               desc="security and exchange commission data graphed"
-              component={() => <SecProject goBackFunc={setProj} />} // Pass as function
+              component={() => <IndProject name = {'sec'} goBackFunc={setProj} />} 
               setProject={setProj}
             />
           </div>
