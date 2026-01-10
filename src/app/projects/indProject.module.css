@@ -1,0 +1,48 @@
+.projContainer {
+    position: absolute;
+    width: 100%;
+    height: 80vh;
+    background-color: rgba(255, 255, 255, 0.728);
+    display: flex;
+    align-items: flex-start;
+    padding: 5%;
+    flex-direction: column;
+}
+.headerCont {
+    display: flex;
+      width: 100%;
+      flex-direction: column;
+}
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.linkCont {
+    display: flex;
+    flex-direction: column;
+    font-size: medium;
+    padding-left: 4%;
+}
+
+.linkCont a {
+    font-size: small;
+    font-family: 'orbit';
+}
+
+.smallLinkCont {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.smallLinkCont a {
+padding-right: 10px;
+}
+
+.smallLinkCont :hover {
+    color: blue;
+    text-decoration: underline;
+}

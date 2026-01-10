@@ -60,6 +60,18 @@
 .favProjRow p { padding-left: 2%; text-align: right;}
 .favProjRow h1 { padding-right: 2%; text-align: left; white-space: nowrap; }
 
+.projCont p { padding-left: 2%; text-align: right;}
+.projCont h2 { padding-right: 2%; text-align: left; white-space: nowrap; }
+
 .page hr {
     width: 100%;
+}
+
+.projCont {
+    margin-top: 4%;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
