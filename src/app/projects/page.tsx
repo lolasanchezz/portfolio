@@ -62,7 +62,9 @@ export default function Projects() {
         <h1>projects</h1>
         <Sphere width={75} height={75} />
       </div>
-       {visibleProj}
+         {visibleProj? visibleProj : (
+      <div className = {styles.main}>
+    
       <div className={styles.favoritesCont}>
         <h4>favorites</h4>
         <div
@@ -93,5 +95,6 @@ export default function Projects() {
         />
       </div>
     </div>
+         )}</div>
   );
 }

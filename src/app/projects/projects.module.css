@@ -1,7 +1,7 @@
 .page {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
   align-items: center;
   justify-content: flex-start;
   background-color: white;
@@ -18,19 +18,19 @@
   flex-direction: row;
   align-items: center;
   height: 15%;
-  justify-content: flex-start;
+  justify-content: left;
   width: 100%;
   text-align: left;
-  padding-bottom: 3%;
 }
 .main {
   display: flex;
+  padding-top: 2%;
   
   width: 100%;
   max-width: 800px;
-  height: 40%;
+  height: 85%;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
@@ -74,4 +74,9 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+.body {
+    display: flex;
+
 }

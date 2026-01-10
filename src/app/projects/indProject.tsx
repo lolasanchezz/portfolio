@@ -26,6 +26,9 @@ export const SecProject = (props: {goBackFunc: any}) => {
     return (
         <div className = {styles.projContainer}>
            <Header backFunc = {props.goBackFunc} name="graph the sec" gh="link" demo="link"/>
+            <div className = {styles.imagesCont}>
+                
+            </div>
         </div>
     )
 }
