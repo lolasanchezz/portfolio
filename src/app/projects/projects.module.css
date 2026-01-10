@@ -93,3 +93,8 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
+.back {
+    padding-right: 5%;
+}
+

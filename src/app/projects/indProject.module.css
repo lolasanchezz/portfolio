@@ -1,17 +1,18 @@
 .projContainer {
     width: 90%;
-    height: 90vh;
+    height: 100vh;
     border-radius: 2%;
     display: flex;
     align-items: flex-start;
     justify-content: first baseline;
-    padding: 0% 5%;
+    
     flex-direction: column;
 }
 .headerCont {
     display: flex;
       width: 100%;
       flex-direction: column;
+    padding-bottom: 5%;
 
 }
 .header {
@@ -52,4 +53,26 @@
 
 .backButton {
     cursor: pointer;
+}
+
+.imageCont {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    white-space: wrap;
+    padding: 2% 0%;
+}
+.imagesCont {
+    display: flex;
+    white-space: wrap;
+    align-self: center;
+justify-items: first baseline;
+}
+
+.imageCont p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 80%;
+    text-align: center;
+    white-space: wrap;
 }

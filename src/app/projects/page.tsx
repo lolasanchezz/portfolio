@@ -28,7 +28,8 @@ export default function Projects() {
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <h1>projects</h1>
+        <p className={styles.back}>back</p>
+         <h1>projects</h1>
         <Sphere width={75} height={75} />
       </div>
       {visibleProj ? (

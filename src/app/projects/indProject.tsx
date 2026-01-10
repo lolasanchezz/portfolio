@@ -1,6 +1,6 @@
 import styles from './indProject.module.css'
 import Image from 'next/image'
-
+import {useState, useEffect} from 'react'
 const Header = (props: {name: string, gh: string, demo: string, backFunc: any}) => {
     return (
         <div className = {styles.headerCont}>
@@ -19,7 +19,31 @@ const Header = (props: {name: string, gh: string, demo: string, backFunc: any}) 
         </div>
     )
 }
+const Imgwsub = (props: {src: string, sub: string, width: number, asp: number}) => {
+    const [dimensions, setDimensions] = useState({ height: 0, width: 0 })
 
+    useEffect(() => {
+        const calculateDimensions = () => {
+                        const w = window.innerWidth * props.width
+
+            const h = w * props.asp
+            setDimensions({ height: h, width: w })
+        }
+        calculateDimensions() 
+        window.addEventListener('resize', calculateDimensions) 
+    }, [window.innerHeight, window.innerWidth])
+
+    return (
+        <div className={styles.imageCont}>
+            <Image height={dimensions.height} width={dimensions.width} src={'/images/' + props.src} alt={props.src} />
+            <p>{props.sub}</p>
+        </div>
+    )
+}
+
+const textBlock = (props: {header: string, text: string}) => {
+
+}
 
 
 
@@ -29,8 +53,11 @@ export const SecProject = (props: {goBackFunc: any}) => {
         <div className = {styles.projContainer}>
            <Header backFunc = {props.goBackFunc} name="graph the sec" gh="link" demo="link"/>
             <div className = {styles.imagesCont}>
-                <Image height={300} width = {300} src = '/images/sec/landing.png' alt = 'landing'/>
+                <Imgwsub asp={1} width={0.25} src = 'sec/landing.png' sub="landing page"/>
+                <Imgwsub asp={0.8} width={0.25} src = 'sec/search.png' sub="searching for Vail Inc (MTN)'s data"/>
+                <Imgwsub asp={0.8} width={0.25} src = 'sec/mtnsearch.png' sub="the results!"/>
             </div>
+        
         </div>
     )
 }
