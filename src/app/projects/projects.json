@@ -1,7 +1,13 @@
 [
+    
+
+
+    
     {
          "shortname": "sec",
          "name": "graph the sec",
+         "favorite": false,
+         "desc": "security and exchange commission data graphed",
          "links": {
             "gh": "link",
             "demo": "link"

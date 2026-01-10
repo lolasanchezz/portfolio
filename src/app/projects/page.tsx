@@ -4,7 +4,7 @@ import Sphere from "../three-scrips/Sphere";
 import { ReactElement, useState } from "react";
 import { JSX } from "react/jsx-runtime";
 import { IndProject, SecondProject } from "./indProject";
-
+import projData from "./projects.json"
 export default function Projects() {
  
 
@@ -12,18 +12,35 @@ export default function Projects() {
 
   const Project = (props: {
     index: number;
-    projName: string;
+    name: string;
     desc: string;
-    component: () => JSX.Element;
+   longName: string;
     setProject: any;
-  }) => {
+    favorite?: boolean;
+    }) => {
     return (
-      <div className={styles.projCont} onClick={() => setProj(props.component)}>
-        <h2> • {props.projName}</h2>
+        <>
+        {props.favorite? (
+             <div className={styles.favProjRow}>
+              <h1>{props.index}. {props.name}</h1>
+              <p>{props.desc}</p>
+            </div>
+
+        ): (
+      <div className={styles.projCont} 
+      onClick={() => setProj(<IndProject goBackFunc = {props.setProject} name={props.name}/>)}
+      >
+        <h2> • {props.longName}</h2>
         <p>{props.desc}</p>
-      </div>
-    );
+      </div> 
+        )}
+        </>
+    )  
   };
+  
+  const favProjects = projData.filter(o => o.favorite === true);
+  const projs = projData.filter(o => o.favorite === false);
+
 
   return (
     <div className={styles.page}>
@@ -49,13 +66,15 @@ export default function Projects() {
               <p>encrypted journal in the terminal</p>
             </div>
             <hr></hr>
-            <Project
-              index={2}
-              projName="graph the sec"
-              desc="security and exchange commission data graphed"
-              component={() => <IndProject name = {'sec'} goBackFunc={setProj} />} 
-              setProject={setProj}
-            />
+            {projs.map((data, index) => (
+                <Project
+                    index={index}
+                    name={data.shortname}
+                    longName={data.name}
+                    desc={data.desc}
+                    setProject={setProj}
+                ></Project>
+            ))}
           </div>
         </div>
       )}
