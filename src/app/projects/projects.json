@@ -9,15 +9,18 @@
          "images": [
             {
                 "src": "landing.png",
-                "subtitle": "home page"
+                "subtitle": "home page",
+                "asp": 1
             },
             {
                 "src": "mtnsearch.png",
-                "subtitle": "searching for company with ticker MTN's data"
+                "subtitle": "searching for company with ticker MTN's data",
+                 "asp": 0.8
             },
              {
                 "src": "mtnsearch.png",
-                "subtitle": "searching for company with ticker MTN's data"
+                "subtitle": "the results!",
+                 "asp": 0.8
             }
          ],
          "text": [

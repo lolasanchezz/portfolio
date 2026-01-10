@@ -2,6 +2,9 @@ import styles from './indProject.module.css'
 import Image from 'next/image'
 import {useState, useEffect} from 'react'
 import projData from './projects.json'
+import { JSX } from "react/jsx-runtime";
+import { text } from 'stream/consumers';
+
 const Header = (props: {name: string, gh: string, demo: string, backFunc: any}) => {
     return (
         <div className = {styles.headerCont}>
@@ -20,7 +23,7 @@ const Header = (props: {name: string, gh: string, demo: string, backFunc: any}) 
         </div>
     )
 }
-const Imgwsub = (props: {src: string, sub: string, width: number, asp: number}) => {
+const Imgwsub = (props: {src: string, sub: string, width: number, asp: number, index?: number}) => {
     const [dimensions, setDimensions] = useState({ height: 0, width: 0 })
 
     useEffect(() => {
@@ -35,14 +38,14 @@ const Imgwsub = (props: {src: string, sub: string, width: number, asp: number}) 
     }, [window.innerHeight, window.innerWidth])
 
     return (
-        <div className={styles.imageCont}>
+        <div className={styles.imageCont} key={props.index}>
             <Image height={dimensions.height} width={dimensions.width} src={'/images/' + props.src} alt={props.src} />
             <p>{props.sub}</p>
         </div>
     )
 }
 
-const TextBlock = (props: {header: string, text: string}) => {
+const TextBlock = (props: {header: string, text: string, index?: number}) => {
 return (
     <div className = {styles.textBlock}>
         <h2>{props.header}</h2>
@@ -59,9 +62,9 @@ export const SecProject = (props: {goBackFunc: any}) => {
         <div className = {styles.projContainer}>
            <Header backFunc = {props.goBackFunc} name="graph the sec" gh="link" demo="link"/>
             <div className = {styles.imagesCont}>
-                <Imgwsub asp={1} width={0.25} src = 'sec/landing.png' sub="landing page"/>
-                <Imgwsub asp={0.8} width={0.25} src = 'sec/search.png' sub="searching for Vail Inc (MTN)'s data"/>
-                <Imgwsub asp={0.8} width={0.25} src = 'sec/mtnsearch.png' sub="the results!"/>
+                <Imgwsub index = {1} asp={1} width={0.25} src = 'sec/landing.png' sub="landing page"/>
+                <Imgwsub index = {2} asp={0.8} width={0.25} src = 'sec/search.png' sub="searching for Vail Inc (MTN)'s data"/>
+                <Imgwsub index = {3} asp={0.8} width={0.25} src = 'sec/mtnsearch.png' sub="the results!"/>
             </div>
         <div className = {styles.textBlockCont}>
         <TextBlock header = "overview" text = 
@@ -75,29 +78,21 @@ export const SecProject = (props: {goBackFunc: any}) => {
 
 
 export const IndProject = (props: {goBackFunc: any, name: string}) => {
-    let data;
-    for (let object of projData) {
-        if (object.shortname == props.name) {
-            data = object
-            break
-        }
-    }
-    console.log(data)
+    const data = projData.find(o => o.shortname === props.name);
+if (!data) {
+    throw new Error("couldnt access json"); //this should never happen but typescript is being annoying about it
+}
     return (
        
         <div className = {styles.projContainer}>
             {data? (
                 <>          
-                <Header backFunc = {props.goBackFunc} name={data!.name} gh="link" demo="link"/>
+                <Header backFunc = {props.goBackFunc} name={data.name} gh={data.links.gh} demo={data.links.demo}/>
             <div className = {styles.imagesCont}>
-                <Imgwsub asp={1} width={0.25} src = 'sec/landing.png' sub="landing page"/>
-                <Imgwsub asp={0.8} width={0.25} src = 'sec/search.png' sub="searching for Vail Inc (MTN)'s data"/>
-                <Imgwsub asp={0.8} width={0.25} src = 'sec/mtnsearch.png' sub="the results!"/>
+                {data.images.map((imageData, index) => (<Imgwsub index={index} asp={imageData.asp} width={0.25} src={props.name + "/" + imageData.src} sub={imageData.subtitle}></Imgwsub>))}
             </div>
         <div className = {styles.textBlockCont}>
-        <TextBlock header = "overview" text = 
-        "A website to look at "
-        ></TextBlock> 
+            {data.text.map((textData, index) => (<TextBlock header={textData.header} index = {index} text={textData.body}/>))}
         </div>
         </>): <p>loading...</p>}
         </div>
