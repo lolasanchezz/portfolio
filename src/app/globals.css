@@ -2,7 +2,14 @@
   --background: #ffffff;
   --foreground: #171717;
 }
-
+@font-face {
+  font-family: 'terminal';
+  src: url('/terminal.woff') format('woff')
+} 
+@font-face {
+  font-family: 'orbit';
+  src: url('/orbit.ttf') format('truetype')  
+}
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -17,9 +24,9 @@ body {
 }
 
 body {
-  color: var(--foreground);
+  color: #000000;
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: terminal, orbit;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
