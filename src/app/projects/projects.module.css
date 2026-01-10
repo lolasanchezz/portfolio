@@ -57,6 +57,8 @@
 }
 
 
+
+
 .favProjRow p { padding-left: 2%; text-align: right;}
 .favProjRow h1 { padding-right: 2%; text-align: left; white-space: nowrap; }
 
@@ -79,4 +81,15 @@
 .body {
     display: flex;
 
+}
+
+.projCont:hover {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.favProjRow:hover {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
 }

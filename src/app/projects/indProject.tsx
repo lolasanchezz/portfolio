@@ -1,15 +1,17 @@
 import styles from './indProject.module.css'
+import Image from 'next/image'
 
 const Header = (props: {name: string, gh: string, demo: string, backFunc: any}) => {
     return (
         <div className = {styles.headerCont}>
-            <p onClick = {() => {props.backFunc(null)}}>x</p>
+            <p onClick = {() => {props.backFunc(null)}} className = {styles.backButton}>x</p>
         <div className = {styles.header}>    
             <h1 style = {{textDecoration: 'underline'}}>{props.name}</h1>
             <div className = {styles.linkCont}>
                 <p>links</p>
             <div className = {styles.smallLinkCont}>
                 <a href={props.gh}>github</a>
+                <Image className = {styles.icon} height={10} width={10} src='/github.png' alt='github' />
                 <a href={props.demo}>demo</a>
                 </div>
             </div>
@@ -27,7 +29,7 @@ export const SecProject = (props: {goBackFunc: any}) => {
         <div className = {styles.projContainer}>
            <Header backFunc = {props.goBackFunc} name="graph the sec" gh="link" demo="link"/>
             <div className = {styles.imagesCont}>
-                
+                <Image height={300} width = {300} src = '/images/sec/landing.png' alt = 'landing'/>
             </div>
         </div>
     )

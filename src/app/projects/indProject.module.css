@@ -18,7 +18,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: flex-sta;
 }
 
 .linkCont {
@@ -37,10 +37,12 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 
-.smallLinkCont a {
-padding-right: 10px;
+.icon {
+    margin-right: 10px;
+    margin-left: 4px;
 }
 
 .smallLinkCont :hover {
@@ -48,6 +50,6 @@ padding-right: 10px;
     text-decoration: underline;
 }
 
-.imagesCont {
-    
+.backButton {
+    cursor: pointer;
 }
