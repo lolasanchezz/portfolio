@@ -1,0 +1,6 @@
+[
+  {
+    "title": "coding",
+    "desc": "I like most things that have to do with computers. For the occasional website, I love using Typescript with React and Next.js for full-stack websites (eg, writing APIs and frontend with Next.js). I’m also a fan of the aesthetic and efficiency of command line interfaces, which I primarily write with Golang and a tui library called Bubble Tea. I have also dabbled in containerization during a prior internship, learning Kubernetes and Docker, and Elasticsearch and Vega to visualize large datasets. In developing Ntwatch, I learned lots of C in order to read kernel api data on macOS sockets. I’m a big defender of macOS (though not Apple), and I’m ride or die with my 2022 MacBook and my Framework Laptop 2. I live my life by the UNIX philosophy."
+  }
+]

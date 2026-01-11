@@ -1,0 +1,76 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: white;
+  padding: 2% 0% 2% 5%;
+}
+
+
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 15%;
+  justify-content: left;
+  width: 100%;
+  text-align: left;
+}
+.main {
+  display: flex;
+  padding-top: 2%;
+  width: 100%;
+  height: 100vh;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.hobbyRow {
+    font-family: 'orbit'
+}
+.hobbyRow:hover {
+   text-decoration: underline;
+}
+
+.messageCont {
+    width: 60%;
+    height: 80vh;
+    min-height: 80vh;
+    position: relative;
+}
+.meImg {
+    display: flex;
+    justify-content: right;
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+}
+.bubbleCont {
+    display: flex;
+    justify-content: right;
+    height: 90%;
+    width: 100%;
+    position: absolute;
+    bottom: 10%;
+    right: 0%;
+}
+
+
+.textDiv {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-right: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.textDiv p {
+    width: 50%;
+    padding-bottom: 5%;
+}

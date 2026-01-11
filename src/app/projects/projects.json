@@ -22,7 +22,9 @@
         ],
         "text": [
             {"header": "Summary", "body": "A CLI to track internet usage through live packet capture and socket analysis."
-        }
+        },
+        {"header": "Inspiration", "body": "I was initially inspired by wireshark - an app that, although extremely practical, "}
+
         ]
     },
 

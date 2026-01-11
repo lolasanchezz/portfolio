@@ -5,7 +5,10 @@ import { ReactElement, useState } from "react";
 import { JSX } from "react/jsx-runtime";
 import { IndProject } from "./indProject";
 import projData from "./projects.json";
+import {useRouter} from "next/navigation"
+
 export default function Projects() {
+const router = useRouter()
   const [visibleProj, setProj] = useState<JSX.Element | null>(null);
 
   const Project = (props: {
@@ -55,7 +58,7 @@ export default function Projects() {
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <p className={styles.back}>back</p>
+        <p onClick = {() => router.push('/')} className={styles.back}>back</p>
         <h1>projects</h1>
         <Sphere width={75} height={75} />
       </div>
