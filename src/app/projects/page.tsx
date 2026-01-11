@@ -4,13 +4,14 @@ import Sphere from "../three-scrips/Sphere";
 import { ReactElement, useState } from "react";
 import { JSX } from "react/jsx-runtime";
 import { IndProject } from "./indProject";
-import projData from "./projects.json";
+import projData from "./projects.json"
 import {useRouter} from "next/navigation"
+
+
 
 export default function Projects() {
 const router = useRouter()
   const [visibleProj, setProj] = useState<JSX.Element | null>(null);
-
   const Project = (props: {
     index: number;
     name: string;

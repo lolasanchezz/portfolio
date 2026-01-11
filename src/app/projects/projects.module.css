@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: flex-start;
   background-color: white;
-  padding: 2% 5%;
+  padding: 5% 2% 0% 2%;
 }
 
 .page p {
@@ -28,7 +28,7 @@
   
   width: 100%;
   max-width: 800px;
-  height: 85%;
+  height: 100vh;
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
