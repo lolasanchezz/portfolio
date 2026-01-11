@@ -1,8 +1,58 @@
 [
-    
+    {
+        "shortname": "ntwatch",
+        "name": "ntwatch",
+        "favorite": true,
+        "desc": "packets and processes - wireshark + nettop",
+        "links": {
+            "gh": "link",
+            "demo": "link"
+        },
+        "images": [
+            {
+                "src":"v1_ntwatch.png",
+                "subtitle": "first version - illustrates use of cgo to use c libraries with go cli libraries",
+                "asp": 0.6
+            },
+            {
+                "src":"design.png",
+                "subtitle":"system design",
+                "asp": 0.6
+            }
+        ],
+        "text": [
+            {"header": "Summary", "body": "A CLI to track internet usage through live packet capture and socket analysis."
+        }
+        ]
+    },
 
+     {
+        "shortname": "journalcli",
+        "name": "journalcli",
+        "favorite": true,
+        "desc": "an encrypted journal in the terminal",
+        "links": {
+            "gh": "link",
+            "demo": "link"
+        },
+        "images": [
+            {
+                "src":"v1_ntwatch.png",
+                "subtitle": "first version - illustrates use of cgo to use c libraries with go cli libraries",
+                "asp": 1
+            },
+            {
+                "src":"design.png",
+                "subtitle":"system design",
+                "asp": 0.6
+            }
+        ],
+        "text": [
+            {"header": "Summary", "body": "A CLI to track internet usage through live packet capture and socket analysis."
+        }
+        ]
+    },
 
-    
     {
          "shortname": "sec",
          "name": "graph the sec",
@@ -24,13 +74,15 @@
                  "asp": 0.8
             },
              {
-                "src": "mtnsearch.png",
+                "src": "search.png",
                 "subtitle": "the results!",
                  "asp": 0.8
             }
          ],
          "text": [
-            {"header": "overview", "body": "hello"}
+            {"header": "Summary", "body": 
+            "A website to graph publicly available data from the SEC"
+        }
          ]
     }
 ]

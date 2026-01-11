@@ -67,7 +67,7 @@
     display: flex;
     white-space: wrap;
     align-self: center;
-justify-items: first baseline;
+    
 }
 
 .imageCont p {

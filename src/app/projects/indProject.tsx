@@ -54,29 +54,6 @@ return (
 )
 }
 
-
-
-export const SecProject = (props: {goBackFunc: any}) => {
-    console.log(props.goBackFunc)
-    return (
-        <div className = {styles.projContainer}>
-           <Header backFunc = {props.goBackFunc} name="graph the sec" gh="link" demo="link"/>
-            <div className = {styles.imagesCont}>
-                <Imgwsub index = {1} asp={1} width={0.25} src = 'sec/landing.png' sub="landing page"/>
-                <Imgwsub index = {2} asp={0.8} width={0.25} src = 'sec/search.png' sub="searching for Vail Inc (MTN)'s data"/>
-                <Imgwsub index = {3} asp={0.8} width={0.25} src = 'sec/mtnsearch.png' sub="the results!"/>
-            </div>
-        <div className = {styles.textBlockCont}>
-        <TextBlock header = "overview" text = 
-        "A website to look at "
-        ></TextBlock> 
-        </div>
-        </div>
-    )
-}
-
-
-
 export const IndProject = (props: {goBackFunc: any, name: string}) => {
     const data = projData.find(o => o.shortname === props.name);
 if (!data) {
@@ -89,7 +66,7 @@ if (!data) {
                 <>          
                 <Header backFunc = {props.goBackFunc} name={data.name} gh={data.links.gh} demo={data.links.demo}/>
             <div className = {styles.imagesCont}>
-                {data.images.map((imageData, index) => (<Imgwsub index={index} asp={imageData.asp} width={0.25} src={props.name + "/" + imageData.src} sub={imageData.subtitle}></Imgwsub>))}
+                {data.images.map((imageData, index) => (<Imgwsub index={index} asp={imageData.asp} width={(1/data.images.length)-(1/(4* data.images.length))} src={props.name + "/" + imageData.src} sub={imageData.subtitle}></Imgwsub>))}
             </div>
         <div className = {styles.textBlockCont}>
             {data.text.map((textData, index) => (<TextBlock header={textData.header} index = {index} text={textData.body}/>))}
@@ -100,10 +77,5 @@ if (!data) {
     )
 }
 
-
-export const SecondProject = () => {
-    return (
-<div></div>    )
-}
 
 
