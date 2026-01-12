@@ -10,6 +10,14 @@
 
 
 
+.specialCont {
+    display: flex;
+    height: 90vh;
+    width: 100%;
+    flex-direction: column;
+    font-size: xxx-large;
+}
+
 .header {
   display: flex;
   flex-direction: row;

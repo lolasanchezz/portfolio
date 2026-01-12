@@ -4,7 +4,7 @@ import CatComp from "../three-scrips/CatComp"
 import allHobbys from "./about.json"
 import {useState, useEffect} from 'react'
 import Image from 'next/image'
-
+/*
 export default function About() {
     const [message, setMessage] = useState('...')
     const [hovered, setHovered] = useState('')
@@ -57,4 +57,23 @@ export default function About() {
     </div>
 </div>
 )
+}
+*/
+
+export default function About() {
+    return (
+        <div className = {styles.page}>
+    <div className = {styles.header}>
+        <h1>about</h1>
+        <CatComp width = {75} height = {75}/>
+    </div>
+    <div className = {styles.specialCont}>
+        <p>lola sanchez</p>
+        <p>lsanchez@gcschool.org</p>
+        <p>github: lolasanchezz</p>
+        <a href="www.linkedin.com/in/lola-sanchez-55193a31a">linkedin: Lola Sanchez</a>
+        <p>based in nyc</p>
+    </div>
+    </div>
+    )
 }
