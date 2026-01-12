@@ -3,6 +3,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import CatComp from "./three-scrips/CatComp"
+import Torus from "./three-scrips/Torus"
 import Sphere from "./three-scrips/Sphere"
 import { useRouter } from 'next/navigation';
 
@@ -16,7 +17,7 @@ export default function Main() {
       </div>
       <main className={styles.main}>
         <div className={styles.threecontainer}>
-        <CatComp width={300} height = {300}></CatComp>
+        <Torus width={300} height = {300}></Torus>
         <p onClick = {() => router.push("/about")} className = {styles.button}>about</p>
         </div>
         <div className = {styles.threecontainer}>

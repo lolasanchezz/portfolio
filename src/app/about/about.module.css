@@ -83,3 +83,13 @@
     
     padding-bottom: 5%;
 }
+
+.back:hover {
+    color: blue;
+    cursor: pointer;
+}
+
+
+.back {
+    font-size: medium;
+}

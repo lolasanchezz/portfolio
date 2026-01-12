@@ -92,10 +92,7 @@
         Each 'page' of the website has its own component and styling, and every journal entry is AES encrypted. Journal entries can even be edited after \
         being made. This project was tedious, but worth it - it's a clean journaling app that I actually use."
       },
-      {
-        "header": "Features",
-        "body": ""
-      }
+      
     ]
   },
 

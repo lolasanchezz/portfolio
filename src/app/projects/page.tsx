@@ -25,6 +25,7 @@ const router = useRouter()
         {props.favorite ? (
           <div
             className={styles.favProjRow}
+            key={props.index}
             onClick={() =>
               setProj(
                 <IndProject goBackFunc={props.setProject} name={props.name} />
@@ -39,6 +40,7 @@ const router = useRouter()
         ) : (
           <div
             className={styles.projCont}
+            key={props.index}
             onClick={() =>
               setProj(
                 <IndProject goBackFunc={props.setProject} name={props.name} />

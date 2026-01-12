@@ -1,9 +1,11 @@
 'use client'
 import styles from "./about.module.css"
 import CatComp from "../three-scrips/CatComp"
+import Torus from "../three-scrips/Torus"
 import allHobbys from "./about.json"
 import {useState, useEffect} from 'react'
 import Image from 'next/image'
+import {useRouter} from 'next/navigation'
 /*
 export default function About() {
     const [message, setMessage] = useState('...')
@@ -61,11 +63,13 @@ export default function About() {
 */
 
 export default function About() {
+    const Router = useRouter()
     return (
         <div className = {styles.page}>
+            
     <div className = {styles.header}>
         <h1>about</h1>
-        <CatComp width = {75} height = {75}/>
+        <Torus width = {75} height = {75}/>
     </div>
     <div className = {styles.specialCont}>
         <p>lola sanchez</p>
@@ -74,6 +78,8 @@ export default function About() {
         <a href="www.linkedin.com/in/lola-sanchez-55193a31a">linkedin: Lola Sanchez</a>
         <p>based in nyc</p>
     </div>
+            <p className = {styles.back} onClick = {() => Router.push('/')}>back</p>
+
     </div>
     )
 }
