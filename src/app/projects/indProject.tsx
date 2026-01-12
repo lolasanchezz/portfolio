@@ -14,7 +14,7 @@ const Header = (props: {name: string, gh: string, demo: string, backFunc: any}) 
             <div className = {styles.linkCont}>
                 <p>links</p>
             <div className = {styles.smallLinkCont}>
-                <a href={props.gh}>github</a>
+               {props.gh == ""? <></>: <a href={props.gh}>github</a>}
                 <Image className = {styles.icon} height={10} width={10} src='/github.png' alt='github' />
                 <a href={props.demo}>demo</a>
                 </div>

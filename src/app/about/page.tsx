@@ -49,7 +49,7 @@ export default function About() {
             <Image  alt = "me" src = "/me.png" height = {window.innerHeight / 3} width = {(window.innerHeight / 3)}/>
             </div>
             <div className = {styles.textDiv}
-                style = {{fontSize: `${window.innerHeight * 0.015}px`}}>
+                style = {{fontSize: `${Math.min(window.innerHeight * 0.025, window.innerWidth * 0.018)}px`}}>
                 <p>{message}</p>
             </div>
             
