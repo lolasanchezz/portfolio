@@ -1,6 +1,5 @@
 'use client'
 import styles from "./about.module.css"
-import CatComp from "../three-scrips/CatComp"
 import Torus from "../three-scrips/Torus"
 import allHobbys from "./about.json"
 import {useState, useEffect} from 'react'
@@ -75,7 +74,7 @@ export default function About() {
         <p>lola sanchez</p>
         <p>lsanchez@gcschool.org</p>
         <p>github: lolasanchezz</p>
-        <a href="www.linkedin.com/in/lola-sanchez-55193a31a">linkedin: Lola Sanchez</a>
+        <a href="https://linkedin.com/in/lola-sanchez-55193a31a">linkedin: Lola Sanchez</a>
         <p>based in nyc</p>
     </div>
             <p className = {styles.back} onClick = {() => Router.push('/')}>back</p>

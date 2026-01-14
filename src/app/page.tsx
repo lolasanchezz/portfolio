@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import styles from "./page.module.css";
-import CatComp from "./three-scrips/CatComp"
 import Torus from "./three-scrips/Torus"
 import Sphere from "./three-scrips/Sphere"
 import { useRouter } from 'next/navigation';

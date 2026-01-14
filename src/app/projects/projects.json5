@@ -61,8 +61,8 @@
     "favorite": true,
     "desc": "an encrypted journal in the terminal",
     "links": {
-      "gh": "github.com/lolasanchezz/journalcli",
-      "demo": "github.com/lolasanchezz/journalcli/releases/tag/main"
+      "gh": "https://github.com/lolasanchezz/journalcli",
+      "demo": "https://github.com/lolasanchezz/journalcli/releases/tag/main"
     },
     "images": [
       {
@@ -102,8 +102,8 @@
     "favorite": false,
     "desc": "security and exchange commission data graphed",
     "links": {
-      "gh": "github.com/lolasanchezz/sec-frontend",
-      "demo": "graphthesec.xyz"
+      "gh": "https://github.com/lolasanchezz/sec-frontend",
+      "demo": "https://graphthesec.xyz"
     },
     "images": [
       {
@@ -154,8 +154,8 @@
     "favorite": false,
     "desc": "drawing in the terminal!",
     "links": {
-      "gh": "github.com/lolasanchezz/terminal-draw",
-      "demo": "github.com/lolasanchezz/terminal-draw/releases/tag/v1.0"
+      "gh": "https://github.com/lolasanchezz/terminal-draw",
+      "demo": "https://github.com/lolasanchezz/terminal-draw/releases/tag/v1.0"
     },
     "images": [
       {
@@ -189,7 +189,7 @@
     "desc": "serving websites and services from the pi 5",
     "links": {
       "gh": "",
-      "demo": "secretcrib.mooo.com"
+      "demo": "https://secretcrib.mooo.com"
     },
     "images": [
       {

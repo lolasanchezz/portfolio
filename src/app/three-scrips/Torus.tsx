@@ -26,7 +26,7 @@ const Torus = (props: { width: number; height: number }) => {
         1000
       );
 
-      const geometry = new THREE.TorusGeometry(1.1, 0.7, 20, 40);
+      const geometry = new THREE.TorusGeometry(1.5, 0.7, 20, 40);
       camera.position.z = 3;
       camera.position.x = -3;
       camera.position.y = -2.5;
