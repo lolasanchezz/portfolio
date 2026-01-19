@@ -1,16 +1,22 @@
 "use client";
 import styles from "./projects.module.css";
 import Sphere from "../three-scrips/Sphere";
-import { ReactElement, useState } from "react";
+import { ReactElement, useState, useEffect } from "react";
 import { JSX } from "react/jsx-runtime";
 import { IndProject } from "./indProject";
-import projData from "./projects.json"
-import {useRouter} from "next/navigation"
 
-
+import { useRouter } from "next/navigation";
+import getJson5 from "../getJson";
 
 export default function Projects() {
-const router = useRouter()
+  const [projData, setProjData] = useState<any[]>([]);
+  useEffect(() => {
+    getJson5("projects.json5").then((val) => {
+      setProjData(val)
+    })
+  }, []);
+
+  const router = useRouter();
   const [visibleProj, setProj] = useState<JSX.Element | null>(null);
   const Project = (props: {
     index: number;
@@ -28,7 +34,7 @@ const router = useRouter()
             key={props.index}
             onClick={() =>
               setProj(
-                <IndProject goBackFunc={props.setProject} name={props.name} />
+                <IndProject goBackFunc={props.setProject} name={props.name} />,
               )
             }
           >
@@ -43,7 +49,7 @@ const router = useRouter()
             key={props.index}
             onClick={() =>
               setProj(
-                <IndProject goBackFunc={props.setProject} name={props.name} />
+                <IndProject goBackFunc={props.setProject} name={props.name} />,
               )
             }
           >
@@ -55,13 +61,19 @@ const router = useRouter()
     );
   };
 
-  const favProjects = projData.filter((o) => o.favorite === true);
-  const projs = projData.filter((o) => o.favorite === false);
+  const favProjects = projData.filter(
+    (o: { favorite: boolean }) => o.favorite === true,
+  );
+  const projs = projData.filter(
+    (o: { favorite: boolean }) => o.favorite === false,
+  );
 
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <p onClick = {() => router.push('/')} className={styles.back}>back</p>
+        <p onClick={() => router.push("/")} className={styles.back}>
+          back
+        </p>
         <h1>projects</h1>
         <Sphere width={75} height={75} />
       </div>
@@ -71,26 +83,36 @@ const router = useRouter()
         <div className={styles.main}>
           <div className={styles.favoritesCont}>
             <h4>favorites</h4>
-            {favProjects.map((data, index) => (
-              <Project
-                index={index}
-                name={data.shortname}
-                longName={data.name}
-                desc={data.desc}
-                setProject={setProj}
-                favorite={true}
-              />
-            ))}
+            {favProjects.map(
+              (
+                data: { shortname: string; name: string; desc: string },
+                index: number,
+              ) => (
+                <Project
+                  index={index}
+                  name={data.shortname}
+                  longName={data.name}
+                  desc={data.desc}
+                  setProject={setProj}
+                  favorite={true}
+                />
+              ),
+            )}
             <hr></hr>
-            {projs.map((data, index) => (
-              <Project
-                index={index}
-                name={data.shortname}
-                longName={data.name}
-                desc={data.desc}
-                setProject={setProj}
-              ></Project>
-            ))}
+            {projs.map(
+              (
+                data: { shortname: string; name: string; desc: string },
+                index: number,
+              ) => (
+                <Project
+                  index={index}
+                  name={data.shortname}
+                  longName={data.name}
+                  desc={data.desc}
+                  setProject={setProj}
+                ></Project>
+              ),
+            )}
           </div>
         </div>
       )}
