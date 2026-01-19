@@ -209,7 +209,7 @@
         "body": "Nginx and configuration on my pi 5!"
       },
       {"header": "Inspiration",
-      "body": "I needed a place to host websites, minecraft servers, and ssh servers, so I decided to \
+      "body": "I needed a place to host websites, minecraft servers, and git servers, so I decided to \
       set up a raspberry pi 5 at home. I've always liked the idea of having one's own technology be \
       independent and only answer to their user, rather than a larger company. With self-hosting, everything \
       is completely clear, and my servives are completely in my control. Plus, it's nice having a \
@@ -219,7 +219,7 @@
         "header": "Result",
         "body": "So far, I only have one Raspberry Pi 5 with Raspberry Pi OS Bookworm, with a usb flash drive. It \
         serves websites through NGINX and Let's Encrypt, which allows me to buy different domains, alias \
-        them to the same freedns name, and have NGINX redirect traffic based on the domain name. I also have a local SSH server running, \
+        them to the same freedns name, and have NGINX redirect traffic based on the domain name. I also have a local git server running, \
         Soft Serve from Charm Bracelet, which allows me to back up local repos without relying on github."
       },
     ]

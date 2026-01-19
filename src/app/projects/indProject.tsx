@@ -15,7 +15,7 @@ const Header = (props: {name: string, gh: string, demo: string, backFunc: any}) 
                 <p>links</p>
             <div className = {styles.smallLinkCont}>
                {props.gh == ""? <></>: <a href={props.gh}>github</a>}
-                <img className = {styles.icon} height={10} width={10} src='/github.png' alt='github' />
+                <Image className = {styles.icon} height={10} width={10} src='/github.png' alt='github' />
                 <a href={props.demo}>demo</a>
                 </div>
             </div>
@@ -39,7 +39,7 @@ const Imgwsub = (props: {src: string, sub: string, width: number, asp: number, i
 
     return (
         <div className={styles.imageCont} key={props.index}>
-            <img height={dimensions.height} width={dimensions.width} src={'/images/' + props.src} alt={props.src} />
+            <Image height={dimensions.height} width={dimensions.width} src={'/images/' + props.src} alt={props.src} />
             <p>{props.sub}</p>
         </div>
     )
