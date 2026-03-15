@@ -9,18 +9,16 @@
       "demo": "https://github.com/lolasanchezz/ntwatch/releases/tag/v0.3.5"
     },
     "images": [
-     
+      {
+        "src": "v1_ntwatch.png",
+        "subtitle": "first version - illustrates use of cgo to use c libraries with go cli libraries",
+        "asp": 0.6
+      },
       {
         "src": "design.png",
         "subtitle": "system design",
-        "asp": 0.7
-      },
-      {
-        "src":"ntwatch.gif",
-        "subtitle":"first working version - sockets and packets",
-        "asp": 0.8
+        "asp": 0.6
       }
-
     ],
     "text": [
       {
