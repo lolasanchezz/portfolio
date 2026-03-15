@@ -24,6 +24,7 @@ export default function Main() {
           <p onClick = {() => router.push("/projects")} className = {styles.button}>projects</p>
         </div>
       </main>
+      <p onClick = {() => router.push("./admin")} className = {styles.button}>admin</p>
     </div>
   );
 }

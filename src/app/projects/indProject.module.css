@@ -61,13 +61,13 @@
     flex-direction: column;
     
     white-space: wrap;
-    padding: 2% 0%;
+    margin: 0% 5%;
 }
 .imagesCont {
     display: flex;
     white-space: wrap;
     align-self: center;
-    
+    justify-content: center;
 }
 
 .imageCont p {
@@ -77,6 +77,7 @@
     text-align: center;
     white-space: wrap;
 }
+
 
 .textBlockCont {
     display: flex;
