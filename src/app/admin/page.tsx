@@ -1,22 +1,31 @@
-'use client'
+"use client";
 import { useEffect, useState } from "react";
 import { createClient } from "../supabase/client";
 
 const Admin = () => {
-  const [isLola, setIsLola] = useState<boolean | null>(null);
+  const [isLola, setIsLola] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const signIn = async () => {
       const supabase = createClient();
+      const { data: sessionData } = await supabase.auth.getSession();
 
-      await supabase.auth.signInWithOAuth({
-        provider: "github",
-      });
+      if (!sessionData.session) {
+        await supabase.auth.signInWithOAuth({
+          provider: "github",
+          options: {
+            redirectTo: `${window.location.origin}/auth/callback?next=/admin`,
+          },
+        });
+        return;
+      }
 
       const { data } = await supabase.auth.getUserIdentities();
-
-      if (data?.identities[0]?.identity_data?.email === "lolasanchez@icloud.com") {
+      console.log(data);
+      if (
+        data?.identities[0]?.identity_data?.email === "lolansanchez@icloud.com"
+      ) {
         setIsLola(true);
       } else {
         setIsLola(false);
@@ -32,4 +41,4 @@ const Admin = () => {
   return <></>;
 };
 
-export default Admin
+export default Admin;
