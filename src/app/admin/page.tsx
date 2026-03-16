@@ -2,6 +2,9 @@
 import { useEffect, useState } from "react";
 import { createClient } from "../supabase/client";
 import styles from "./admin.module.css";
+import Markdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+
 const Admin = () => {
   const [isLola, setIsLola] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -12,10 +15,10 @@ const Admin = () => {
   useEffect(() => {
     setMarkdownText(selProj?.body ?? "");
   }, [selProj]);
-
+ const supabase = createClient();
   useEffect(() => {
     const signIn = async () => {
-      const supabase = createClient();
+     
       const { data: sessionData } = await supabase.auth.getSession();
 
       if (!sessionData.session) {
@@ -63,27 +66,66 @@ const Admin = () => {
           </p>
           <div className={styles.exisProjsDiv}>
             {exisProjects.map((proj, index) => (
-              <ExisProj key={proj?.id ?? index} project={proj} setProject={setSelProj} />
+              <ExisProj
+                key={proj?.id ?? index}
+                project={proj}
+                setProject={setSelProj}
+              />
             ))}
           </div>
-          <p className={styles.button}>make new project</p>
         </div>
-        <div className = {styles.markdownEnterer}>
-            <textarea
-              className={styles.markdownInput}
-              autoFocus
-              value={markdownText}
-              onChange={(e) => setMarkdownText(e.target.value)}
-            />
+        <div className={styles.markdownEnterer}>
+          <textarea
+            className={styles.markdownInput}
+            autoFocus
+            value={markdownText}
+            onChange={(e) => setMarkdownText(e.target.value)}
+          />
+          <p
+            className={styles.button}
+            onClick={async () => {
+              if (!selProj?.id) {
+                console.error("No project selected");
+                return;
+              }
+              console.log(selProj)
+              const { data, error } = await supabase
+                .from("projects")
+                .update({ body: markdownText })
+                .eq('id', selProj.id)
+                .select()
+               
+
+              if (error) {
+                console.error(error);
+                return;
+              }
+
+              console.log(data)
+            }}
+          >
+            submit
+          </p>
+        </div>
+        <div className={styles.markdownViewer}>
+          <Markdown rehypePlugins={[rehypeRaw]}>{markdownText}</Markdown>
         </div>
       </div>
     </div>
   );
 };
 
-const ExisProj = (props: { project: any, setProject: any}) => {
+
+
+
+const ExisProj = (props: { project: any; setProject: any }) => {
   return (
-    <div className={styles.exisProjTile} onClick = {() => {props.setProject(props.project)}}>
+    <div
+      className={styles.exisProjTile}
+      onClick={() => {
+        props.setProject(props.project);
+      }}
+    >
       <h3>{props.project.name}</h3>
       <p>{props.project.desc}</p>
     </div>
