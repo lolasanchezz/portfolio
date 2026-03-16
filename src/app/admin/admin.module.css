@@ -1,0 +1,58 @@
+
+.main {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 2%;
+    flex-direction: column;
+}
+
+
+.button {
+font-family: 'orbit'
+}
+
+.button:hover {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.exisProjTile {
+    display: flex;
+    height: 10%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(202, 199, 199);
+
+}
+
+.exisProjCont {
+    overflow-y: scroll;
+    height: 90%;
+}
+
+.body {
+    display: flex;
+    justify-content: space-evenly;
+     width: 100%;
+    height: 100vh;
+}
+
+.markdownEnterer {
+    width: 50%;
+    height: 80%;
+}
+
+.markdownInput {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  line-height: 1.4;
+  padding: 12px;
+  resize: none;
+}
