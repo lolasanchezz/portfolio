@@ -40,11 +40,25 @@ const Admin = () => {
       ) {
         setIsLola(true);
         const { data, error } = await supabase.from("projects").select();
-        if (data == null) {
+        if (error != null) {
           return <p> error: {error.message}</p>;
         }
         console.log(data);
         setExisProjects(data!);
+
+        const { data: images, error: error2 } = await supabase.storage
+          .from("images")
+          .list("", {
+            offset: 0,
+            sortBy: { column: "name", order: "asc" },
+          });
+
+        if (error2 != null) {
+          return <p> error: {error2.message}</p>;
+        } 
+        console.log(images)
+        setRecUploadPhotos((images.map((img) => {return img.name})))
+
       } else {
         setIsLola(false);
       }
@@ -52,13 +66,6 @@ const Admin = () => {
     };
     signIn();
   }, []);
-
-  const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    // Put your storage upload call here when ready.
-  };
 
   if (loading) return <div className={styles.load}>loading</div>;
   if (!isLola)
@@ -90,6 +97,7 @@ const Admin = () => {
               />
             ))}
           </div>
+          <PrevImages exisImages={recUploadedPhotos}/>
         </div>
         <div className={styles.markdownEnterer}>
           <textarea
@@ -138,17 +146,18 @@ const Admin = () => {
                 await supabase.storage
                   .from("images")
                   .upload(baseName + "." + ext, file, { upsert: true });
-                const { data } = supabase.storage.from('images').getPublicUrl(baseName + "." + ext)
+                const { data } = supabase.storage
+                  .from("images")
+                  .getPublicUrl(baseName + "." + ext);
 
                 setRecUploadPhotos((prev) => [
                   ...recUploadedPhotos,
-                 data.publicUrl
+                  data.publicUrl,
                 ]);
               }}
             />
           </form>
-          <p>previously uploaded images:</p>
-          {recUploadedPhotos.map((val, i) => {return <p key = {i} >{val}</p>})}
+        
         </div>
         <div className={styles.markdownViewer}>
           <Markdown
@@ -165,22 +174,25 @@ const Admin = () => {
                   typeof src === "string" && src.trim().length > 0;
                 const hasValidWidth =
                   Number.isFinite(parsedWidth) && parsedWidth > 0;
+
                 const hasValidHeight =
                   Number.isFinite(parsedHeight) && parsedHeight > 0;
 
-                if (!hasValidSrc || !hasValidWidth || !hasValidHeight) {
+                if (!hasValidSrc) {
                   return null;
                 }
 
-                return (
-                  <NextImage
-                    src={src}
-                    alt={alt ?? ""}
-                    width={parsedWidth}
-                    height={parsedHeight}
-                    style={{ maxWidth: "100%", height: "auto" }}
-                  />
-                );
+                if (hasValidWidth && hasValidHeight) {
+                  return (
+                    <NextImage
+                      src={src.trim()}
+                      alt={alt ?? ""}
+                      width={parsedWidth}
+                      height={parsedHeight}
+                      style={{ maxWidth: "100%", height: "auto" }}
+                    />
+                  );
+                } 
               },
             }}
           >
@@ -205,5 +217,17 @@ const ExisProj = (props: { project: any; setProject: any }) => {
     </div>
   );
 };
+
+const PrevImages = (props: {exisImages: string[]}) => {
+  return (<div className = {styles.previousImages}>
+            <p>link to database:</p>
+            <p>{process.env.NEXT_PUBLIC_SUPABASE_URL + "/storage/v1/object/public/images/"}</p>
+          <p>previously uploaded images:</p>
+          {props.exisImages.map((val, i) => {
+            return <p key={i}>{val}</p>;
+          })}
+          </div>)
+}
+
 
 export default Admin;

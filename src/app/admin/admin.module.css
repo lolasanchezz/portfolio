@@ -5,7 +5,7 @@
     height: 100vh;
     justify-content: center;
     align-items: center;
-    padding: 2%;
+    padding: 2% 0;
     flex-direction: column;
 }
 
@@ -23,6 +23,7 @@ font-family: 'orbit'
 .exisProjTile {
     display: flex;
     height: 10%;
+    width: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -34,7 +35,9 @@ font-family: 'orbit'
     overflow-y: scroll;
     height: 90%;
 }
-
+.exisProjs {
+    width: 30%;
+}
 .body {
     display: flex;
     padding-top: 2%;
@@ -75,4 +78,10 @@ overflow-x: wrap;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.previousImages {
+    padding: 5%;
+    background-color: gray;
+    overflow-x: scroll;
 }
