@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { createClient } from "../supabase/client";
 import { useRouter } from "next/navigation";
 import NextImage from "next/image";
@@ -13,6 +13,7 @@ const Admin = () => {
   const [exisProjects, setExisProjects] = useState(null as unknown as any[]);
   const [selProj, setSelProj] = useState(null as unknown as any);
   const [markdownText, setMarkdownText] = useState("");
+  const [recUploadedPhotos, setRecUploadPhotos] = useState([] as string[]);
   const router = useRouter();
   useEffect(() => {
     setMarkdownText(selProj?.body ?? "");
@@ -35,7 +36,7 @@ const Admin = () => {
       const { data } = await supabase.auth.getUserIdentities();
       console.log(data);
       if (
-        data?.identities[0]?.identity_data?.email === "lolansanchez@icloud.com"
+        data?.identities[0]?.identity_data?.email === "lolansanchez@icloud.com" // YES i know this looks unsafe but dont worry theres a sql check as well within supabse
       ) {
         setIsLola(true);
         const { data, error } = await supabase.from("projects").select();
@@ -51,6 +52,13 @@ const Admin = () => {
     };
     signIn();
   }, []);
+
+  const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Put your storage upload call here when ready.
+  };
 
   if (loading) return <div className={styles.load}>loading</div>;
   if (!isLola)
@@ -114,25 +122,56 @@ const Admin = () => {
           >
             submit
           </p>
+          <form>
+            <label htmlFor="imageUpload">upload image</label>
+            <input
+              id="imageUpload"
+              type="file"
+              accept="image/*"
+              onChange={async (e: ChangeEvent<HTMLInputElement>) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                const ext = file.name.split(".").pop() ?? "bin";
+                const baseName = file.name
+                  .replace(/\.[^/.]+$/, "")
+                  .replace(/\s+/g, "-");
+                await supabase.storage
+                  .from("images")
+                  .upload(baseName + "." + ext, file, { upsert: true });
+                const { data } = supabase.storage.from('images').getPublicUrl(baseName + "." + ext)
+
+                setRecUploadPhotos((prev) => [
+                  ...recUploadedPhotos,
+                 data.publicUrl
+                ]);
+              }}
+            />
+          </form>
+          <p>previously uploaded images:</p>
+          {recUploadedPhotos.map((val, i) => {return <p key = {i} >{val}</p>})}
         </div>
         <div className={styles.markdownViewer}>
-          <Markdown rehypePlugins={[rehypeRaw]}
-          components={{
-            img(props) {
+          <Markdown
+            rehypePlugins={[rehypeRaw]}
+            components={{
+              img(props) {
                 const { node, src, alt, width, height } = props;
                 const parsedWidth =
                   typeof width === "number" ? width : Number(width);
                 const parsedHeight =
                   typeof height === "number" ? height : Number(height);
 
-                const hasValidSrc = typeof src === "string" && src.trim().length > 0;
-                const hasValidWidth = Number.isFinite(parsedWidth) && parsedWidth > 0;
-                const hasValidHeight = Number.isFinite(parsedHeight) && parsedHeight > 0;
+                const hasValidSrc =
+                  typeof src === "string" && src.trim().length > 0;
+                const hasValidWidth =
+                  Number.isFinite(parsedWidth) && parsedWidth > 0;
+                const hasValidHeight =
+                  Number.isFinite(parsedHeight) && parsedHeight > 0;
 
                 if (!hasValidSrc || !hasValidWidth || !hasValidHeight) {
                   return null;
                 }
-                
+
                 return (
                   <NextImage
                     src={src}
@@ -142,9 +181,11 @@ const Admin = () => {
                     style={{ maxWidth: "100%", height: "auto" }}
                   />
                 );
-            }
-          }}
-          >{markdownText}</Markdown>
+              },
+            }}
+          >
+            {markdownText}
+          </Markdown>
         </div>
       </div>
     </div>
