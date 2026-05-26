@@ -10,14 +10,9 @@ import rehypeRaw from "rehype-raw";
 const Admin = () => {
   const [isLola, setIsLola] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [exisProjects, setExisProjects] = useState(null as unknown as any[]);
-  const [selProj, setSelProj] = useState(null as unknown as any);
-  const [markdownText, setMarkdownText] = useState("");
-  const [recUploadedPhotos, setRecUploadPhotos] = useState([] as string[]);
+
   const router = useRouter();
-  useEffect(() => {
-    setMarkdownText(selProj?.body ?? "");
-  }, [selProj]);
+
   const supabase = createClient();
   useEffect(() => {
     const signIn = async () => {
@@ -39,26 +34,6 @@ const Admin = () => {
         data?.identities[0]?.identity_data?.email === "lolansanchez@icloud.com" // YES i know this looks unsafe but dont worry theres a sql check as well within supabse
       ) {
         setIsLola(true);
-        const { data, error } = await supabase.from("projects").select();
-        if (error != null) {
-          return <p> error: {error.message}</p>;
-        }
-        console.log(data);
-        setExisProjects(data!);
-
-        const { data: images, error: error2 } = await supabase.storage
-          .from("images")
-          .list("", {
-            offset: 0,
-            sortBy: { column: "name", order: "asc" },
-          });
-
-        if (error2 != null) {
-          return <p> error: {error2.message}</p>;
-        } 
-        console.log(images)
-        setRecUploadPhotos((images.map((img) => {return img.name})))
-
       } else {
         setIsLola(false);
       }
@@ -77,6 +52,54 @@ const Admin = () => {
         </p>
       </div>
     );
+  return <LolaAdmin supabase={supabase} />;
+};
+
+
+
+
+
+const LolaAdmin = ({ supabase }: { supabase: any }) => {
+  const [exisProjects, setExisProjects] = useState([] as any[]);
+  const [selProj, setSelProj] = useState(null as any);
+  const [markdownText, setMarkdownText] = useState("");
+  const [recUploadedPhotos, setRecUploadPhotos] = useState([] as string[]);
+
+  function setSelProjWrapper(selProj) {
+    setMarkdownText(selProj.body)
+    setSelProj(selProj)
+  }
+
+
+
+  useEffect(() => {
+    const signIn = async () => {
+      const { data, error } = await supabase.from("projects").select();
+      if (error != null) {
+        return <p> error: {error.message}</p>;
+      }
+      console.log(data);
+      setExisProjects(data!);
+
+      const { data: images, error: error2 } = await supabase.storage
+        .from("images")
+        .list("", {
+          offset: 0,
+          sortBy: { column: "name", order: "asc" },
+        });
+
+      if (error2 != null) {
+        return <p> error: {error2.message}</p>;
+      }
+      console.log(images);
+      setRecUploadPhotos(
+        images.map((img: any) => {
+          return img.name;
+        }),
+      );
+    };
+    signIn();
+  }, []);
 
   return (
     <div className={styles.main}>
@@ -84,87 +107,75 @@ const Admin = () => {
         <h1>admin dash</h1>
       </div>
       <div className={styles.body}>
-        <div className={styles.exisProjs}>
-          <p className={styles.button} onClick={() => {}}>
-            edit existing projects
-          </p>
-          <div className={styles.exisProjsDiv}>
-            {exisProjects.map((proj, index) => (
-              <ExisProj
-                key={proj?.id ?? index}
-                project={proj}
-                setProject={setSelProj}
-              />
-            ))}
+        <div className={styles.left}>
+          <div className={styles.exisProjs}>
+            {selProj? (<div className = {styles.selectedProject}>
+              <p>selectedProject:</p>
+            <ExisProj project={selProj} setProject={selProj}/>
+            </div>) : <></>}
+            <ExisProjs exisProjects={exisProjects} setSelProj={setSelProjWrapper} />
+            <PrevImages exisImages={recUploadedPhotos} />
           </div>
-          <PrevImages exisImages={recUploadedPhotos}/>
-        </div>
-        <div className={styles.markdownEnterer}>
-          <textarea
-            className={styles.markdownInput}
-            autoFocus
-            value={markdownText}
-            onChange={(e) => setMarkdownText(e.target.value)}
-          />
-          <p
-            className={styles.button}
-            onClick={async () => {
-              if (!selProj?.id) {
-                console.error("No project selected");
-                return;
-              }
-              console.log(selProj);
-              const { data, error } = await supabase
-                .from("projects")
-                .update({ body: markdownText })
-                .eq("id", selProj.id)
-                .select();
-
-              if (error) {
-                console.error(error);
-                return;
-              }
-
-              console.log(data);
-            }}
-          >
-            submit
-          </p>
-          <form>
-            <label htmlFor="imageUpload">upload image</label>
-            <input
-              id="imageUpload"
-              type="file"
-              accept="image/*"
-              onChange={async (e: ChangeEvent<HTMLInputElement>) => {
-                const file = e.target.files?.[0];
-                if (!file) return;
-                const ext = file.name.split(".").pop() ?? "bin";
-                const baseName = file.name
-                  .replace(/\.[^/.]+$/, "")
-                  .replace(/\s+/g, "-");
-                await supabase.storage
-                  .from("images")
-                  .upload(baseName + "." + ext, file, { upsert: true });
-                const { data } = supabase.storage
-                  .from("images")
-                  .getPublicUrl(baseName + "." + ext);
-
-                setRecUploadPhotos((prev) => [
-                  ...recUploadedPhotos,
-                  data.publicUrl,
-                ]);
-              }}
+          <div className={styles.markdownEnterer}>
+            <textarea
+              className={styles.markdownInput}
+              autoFocus
+              value={markdownText}
+              onChange={(e) => setMarkdownText(e.target.value)}
             />
-          </form>
-        
+            <p
+              className={styles.button}
+              onClick={async () => {
+                if (!selProj?.id) {
+                  console.error("No project selected");
+                  return;
+                }
+                console.log(selProj);
+                const { data, error } = await supabase
+                  .from("projects")
+                  .update({ body: markdownText })
+                  .eq("id", selProj.id)
+                  .select();
+
+                if (error) {
+                  console.error(error);
+                  return;
+                }
+
+                console.log(data);
+              }}
+            >
+              submit
+            </p>
+            <form>
+              <label htmlFor="imageUpload">upload image</label>
+              <input
+                id="imageUpload"
+                type="file"
+                accept="image/*"
+                onChange={async (e: ChangeEvent<HTMLInputElement>) => {
+                  const file = e.target.files?.[0];
+                  if (!file) return;
+                  const ext = file.name.split(".").pop() ?? "bin";
+                  const baseName = file.name
+                    .replace(/\.[^/.]+$/, "")
+                    .replace(/\s+/g, "-");
+                  await supabase.storage
+                    .from("images")
+                    .upload(baseName + "." + ext, file, { upsert: true });
+
+                  setRecUploadPhotos((prev) => [...prev, baseName + "." + ext]);
+                }}
+              />
+            </form>
+          </div>
         </div>
         <div className={styles.markdownViewer}>
           <Markdown
             rehypePlugins={[rehypeRaw]}
             components={{
               img(props) {
-                const { node, src, alt, width, height } = props;
+                const { src, alt, width, height } = props;
                 const parsedWidth =
                   typeof width === "number" ? width : Number(width);
                 const parsedHeight =
@@ -179,7 +190,8 @@ const Admin = () => {
                   Number.isFinite(parsedHeight) && parsedHeight > 0;
 
                 if (!hasValidSrc) {
-                  return null;
+                  console.log("returned null");
+                  return;
                 }
 
                 if (hasValidWidth && hasValidHeight) {
@@ -192,7 +204,9 @@ const Admin = () => {
                       style={{ maxWidth: "100%", height: "auto" }}
                     />
                   );
-                } 
+                } else {
+                  console.log("invalid width");
+                }
               },
             }}
           >
@@ -204,12 +218,16 @@ const Admin = () => {
   );
 };
 
+
+
+
 const ExisProj = (props: { project: any; setProject: any }) => {
   return (
     <div
       className={styles.exisProjTile}
       onClick={() => {
         props.setProject(props.project);
+        console.log(props.project);
       }}
     >
       <h3>{props.project.name}</h3>
@@ -218,16 +236,68 @@ const ExisProj = (props: { project: any; setProject: any }) => {
   );
 };
 
-const PrevImages = (props: {exisImages: string[]}) => {
-  return (<div className = {styles.previousImages}>
-            <p>link to database:</p>
-            <p>{process.env.NEXT_PUBLIC_SUPABASE_URL + "/storage/v1/object/public/images/"}</p>
-          <p>previously uploaded images:</p>
-          {props.exisImages.map((val, i) => {
-            return <p key={i}>{val}</p>;
-          })}
-          </div>)
-}
+const ExisProjs = (props: { exisProjects: any; setSelProj: any }) => {
+  const [showing, setShowing] = useState(false);
+  return (
+    <div>
+      <p
+        onClick={() => {
+          setShowing(!showing);
+        }}
+        className={styles.dropdown}
+      >
+        {" "}
+        {showing ? "⌄" : ">"} projects
+      </p>
+      {showing ? (
+        <div className={styles.exisProjsDiv}>
+          {props.exisProjects.map((proj, index) => (
+            <ExisProj
+              key={proj?.id ?? index}
+              project={proj}
+              setProject={props.setSelProj}
+            />
+          ))}
+        </div>
+      ) : (
+        <></>
+      )}
+    </div>
+  );
+};
 
+const PrevImages = (props: { exisImages: string[] }) => {
+  const [showing, setShowing] = useState(false);
+  return (
+    <>
+      <div>
+        <p
+          onClick={() => {
+            setShowing(!showing);
+          }}
+          className={styles.dropdown}
+        >
+          {" "}
+          {showing ? "⌄" : ">"} previous images
+        </p>
+        {showing ? (
+          <div className={styles.previousImages}>
+            <p>link to database:</p>
+            <p>
+              {process.env.NEXT_PUBLIC_SUPABASE_URL +
+                "/storage/v1/object/public/images/"}
+            </p>
+            <p>previously uploaded images:</p>
+            {props.exisImages.map((val, i) => {
+              return <p key={i}>{val}</p>;
+            })}
+          </div>
+        ) : (
+          <></>
+        )}
+      </div>
+    </>
+  );
+};
 
 export default Admin;
