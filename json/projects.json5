@@ -1,6 +1,7 @@
 [
   {
     "name": "ntwatch",
+    "id": 1,
     "shortname": "ntwatch",
     "favorite": true,
     "desc": "packets and processes - wireshark + nettop",
@@ -58,6 +59,7 @@
   },
 
   {
+    "id": 2,
     "shortname": "journalcli",
     "name": "journalcli",
     "favorite": true,
@@ -99,6 +101,7 @@
   },
 
   {
+    "id": 3,
     "shortname": "sec",
     "name": "graph the sec",
     "favorite": false,
@@ -151,6 +154,7 @@
 
 
   {
+    "id": 4,
     "shortname": "terminaldraw",
     "name": "terminal-draw",
     "favorite": false,
@@ -185,6 +189,7 @@
   },
 
   {
+    "id": 5,
     "shortname": "self-hosting",
     "name": "self hosting",
     "favorite": false,

@@ -1,20 +1,31 @@
+"use client"
 import styles from "./indProject.module.css";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { JSX } from "react/jsx-runtime";
-import { text } from "stream/consumers";
-import getJson5 from "../getJson";
+import { useRouter } from "next/navigation";
+
+export type ProjectData = {
+  id: number;
+  shortname: string;
+  name: string;
+  desc: string;
+  favorite: boolean;
+  links: { gh: string; demo: string };
+  text: { header: string; body: string }[];
+  images: { src: string; subtitle: string; asp: number }[];
+};
+
 const Header = (props: {
   name: string;
   gh: string;
   demo: string;
-  backFunc: any;
 }) => {
+  const router = useRouter();
   return (
     <div className={styles.headerCont}>
       <p
         onClick={() => {
-          props.backFunc(null);
+          router.push("/projects");
         }}
         className={styles.backButton}
       >
@@ -58,7 +69,8 @@ const Imgwsub = (props: {
     };
     calculateDimensions();
     window.addEventListener("resize", calculateDimensions);
-  }, [window.innerHeight, window.innerWidth]);
+    return () => window.removeEventListener("resize", calculateDimensions);
+  }, [props.width, props.asp]);
 
   return (
     <div className={styles.imageCont} key={props.index}>
@@ -82,40 +94,34 @@ const TextBlock = (props: { header: string; text: string; index?: number }) => {
   );
 };
 
-export const IndProject = (props: { goBackFunc: any; name: string }) => {
-  const [projData, setProjData] = useState<any[]>([]);
-  useEffect(() => {
-    getJson5("projects.json5").then((val) => {
-      setProjData(val);
-    });
-  }, []);
+export const IndProject = (props: { project: ProjectData }) => {
+  const data = props.project;
 
-  const data = projData.find((o) => o.shortname === props.name);
- 
   return (
     <div className={styles.projContainer}>
       {data ? (
         <>
           <Header
-            backFunc={props.goBackFunc}
             name={data.name}
             gh={data.links.gh}
             demo={data.links.demo}
           />
           <div className={styles.imagesCont}>
-            {data.images.map((imageData: { asp: number; src: string; subtitle: string; }, index: number | undefined) => (
+            {data.images.map((imageData, index) => (
               <Imgwsub
+                key={index}
                 index={index}
                 asp={imageData.asp}
                 width={1 / data.images.length - 1 / (4 * data.images.length)}
-                src={props.name + "/" + imageData.src}
+                src={data.shortname + "/" + imageData.src}
                 sub={imageData.subtitle}
               ></Imgwsub>
             ))}
           </div>
           <div className={styles.textBlockCont}>
-            {data.text.map((textData: { header: string; body: string; }, index: number | undefined) => (
+            {data.text.map((textData, index) => (
               <TextBlock
+                key={index}
                 header={textData.header}
                 index={index}
                 text={textData.body}

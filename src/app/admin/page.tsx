@@ -8,45 +8,18 @@ import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 
 const Admin = () => {
-  const [isLola, setIsLola] = useState(false);
+  const [isLocal, setIsLola] = process.env.NODE_ENV === "development" ? useState(true) : useState(false);
   const [loading, setLoading] = useState(true);
 
   const router = useRouter();
 
-  const supabase = createClient();
-  useEffect(() => {
-    const signIn = async () => {
-      const { data: sessionData } = await supabase.auth.getSession();
-
-      if (!sessionData.session) {
-        await supabase.auth.signInWithOAuth({
-          provider: "github",
-          options: {
-            redirectTo: `${window.location.origin}/auth/callback?next=/admin`,
-          },
-        });
-        return;
-      }
-
-      const { data } = await supabase.auth.getUserIdentities();
-      console.log(data);
-      if (
-        data?.identities[0]?.identity_data?.email === "lolansanchez@icloud.com" // YES i know this looks unsafe but dont worry theres a sql check as well within supabse
-      ) {
-        setIsLola(true);
-      } else {
-        setIsLola(false);
-      }
-      setLoading(false);
-    };
-    signIn();
-  }, []);
+  
 
   if (loading) return <div className={styles.load}>loading</div>;
-  if (!isLola)
+  if (!isLocal)
     return (
       <div className={styles.load}>
-        <p>you're not lola!</p>
+        <p>only available on dev server, sorry!</p>
         <p className={styles.button} onClick={() => router.push("/")}>
           back
         </p>
@@ -123,6 +96,7 @@ const LolaAdmin = ({ supabase }: { supabase: any }) => {
               value={markdownText}
               onChange={(e) => setMarkdownText(e.target.value)}
             />
+            <input placeholder="name" ></input>
             <p
               className={styles.button}
               onClick={async () => {
