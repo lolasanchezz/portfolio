@@ -1,19 +1,27 @@
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #000000;
+  --lavender: #ecebfd;
+  --accent: #5b51e8;
+  --link: #5a2ff0;
+  --line: #8a8a8a;
+  --muted: #555555;
+  --vine: #000000; /* the cursor trail's "@"s */
+
+  --font-sans: "roc-grotesk", sans-serif;
+
+  /* page gutter + type scale, sized off the 1556px desktop frame in figma */
+  --gutter: clamp(1rem, 4vw, 4rem);
+  --text-body: clamp(1.15rem, 2.2vw, 2.25rem);
+  --text-lead: clamp(1.6rem, 3.6vw, 3.75rem);
+  --text-title: clamp(3rem, 7.5vw, 7.5rem);
 }
-@font-face {
-  font-family: 'terminal';
-  src: url('/terminal.woff') format('woff')
-} 
-@font-face {
-  font-family: 'orbit';
-  src: url('/orbit.ttf') format('truetype')  
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #ffffff;
-    --foreground: #ededed;
+
+/* lenis (SmoothScroll) does the smooth scrolling - this is the fallback before it loads.
+   css smooth scrolling fights lenis, so it's off once lenis is running (html.lenis) */
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.lenis) {
+    scroll-behavior: smooth;
   }
 }
 
@@ -25,8 +33,9 @@ body {
 }
 
 body {
-  color: #000000;
-  font-family: terminal, orbit;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -40,4 +49,12 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  line-height: 1;
 }

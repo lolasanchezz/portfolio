@@ -1,0 +1,11 @@
+/* over the page but never catches clicks. multiply so its pale tints darken the page like a
+   highlighter instead of washing the text out */
+.layer {
+  position: fixed;
+  inset: 0;
+  z-index: 51;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}

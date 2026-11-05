@@ -1,90 +1,115 @@
-.projContainer {
-    width: 90%;
-    height: 100vh;
-    border-radius: 2%;
-    display: flex;
-    align-items: flex-start;
-    justify-content: first baseline;
-    
-    flex-direction: column;
+.page {
+  padding-bottom: 4rem;
 }
-.headerCont {
-    display: flex;
-      width: 100%;
-      flex-direction: column;
-    padding-bottom: 5%;
 
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: clamp(1.25rem, 3vw, 3rem) var(--gutter) 0;
 }
-.header {
+
+.links {
+  display: flex;
+  gap: 1.5rem;
+  font-size: var(--text-body);
+}
+
+.links a {
+  color: var(--link);
+  font-style: italic;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+
+.images {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(0.75rem, 2.3vw, 2.25rem);
+  padding: clamp(1.25rem, 3vw, 3rem) var(--gutter);
+  overflow-x: auto;
+}
+
+.images figure {
+  flex: 1 1 0;
+  min-width: min(100%, 22rem);
+}
+
+.images img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+}
+
+.images figcaption {
+  margin-top: 0.4rem;
+  font-size: clamp(0.7rem, 1vw, 0.95rem);
+  color: var(--muted);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  padding: 0 var(--gutter);
+}
+
+.text h2 {
+  margin-bottom: 0.4rem;
+  font-size: var(--text-lead);
+}
+
+/* section bodies are markdown */
+.text section {
+  font-size: clamp(1.15rem, 1.6vw, 1.6rem);
+  line-height: 1.4;
+}
+
+.text section > * + * {
+  margin-top: 0.8em;
+}
+
+.text section > h2 + * {
+  margin-top: 0;
+}
+
+.text section a {
+  color: var(--link);
+  font-style: italic;
+}
+
+.text section a:hover {
+  text-decoration: underline;
+}
+
+.text section ul,
+.text section ol {
+  padding-left: 1.4em;
+}
+
+.text section code {
+  font-size: 0.85em;
+  background: var(--lavender);
+  padding: 0.1em 0.3em;
+  border-radius: 0.25em;
+}
+
+.text section img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 800px) {
+  .images {
+    flex-direction: column;
+  }
+
+  .images figure {
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-sta;
+  }
 }
-
-.linkCont {
-    display: flex;
-    flex-direction: column;
-    font-size: medium;
-    padding-left: 4%;
-}
-
-.linkCont a {
-    font-size: small;
-    font-family: 'orbit';
-}
-
-.smallLinkCont {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.icon {
-    margin-right: 10px;
-    margin-left: 4px;
-}
-
-.smallLinkCont :hover {
-    color: blue;
-    text-decoration: underline;
-}
-
-.backButton {
-    cursor: pointer;
-}
-
-.imageCont {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    
-    white-space: wrap;
-    margin: 0% 5%;
-}
-.imagesCont {
-    display: flex;
-    white-space: wrap;
-    align-self: center;
-    justify-content: center;
-}
-
-.imageCont p {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    max-width: 80%;
-    text-align: center;
-    white-space: wrap;
-}
-
-
-.textBlockCont {
-    display: flex;
-    flex-direction: column;
-}
-
-.textBlock {
-    padding: 2%;
-}
-

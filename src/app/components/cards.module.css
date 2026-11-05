@@ -1,0 +1,98 @@
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  list-style: none;
+}
+
+.tags li {
+  padding: 0.15rem 0.45rem;
+  font-size: clamp(0.65rem, 0.9vw, 0.85rem);
+  color: #ffffff;
+}
+
+.projectCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-height: clamp(18rem, 35vw, 34rem);
+  padding: clamp(1rem, 2.3vw, 2.25rem);
+  border: 1px solid var(--line);
+  transition: background 0.15s;
+}
+
+.projectCard:hover {
+  background: var(--lavender);
+}
+
+.projectCard h3 {
+  margin-top: 0.4rem;
+  font-size: clamp(2.75rem, 5.6vw, 5.5rem);
+  overflow-wrap: anywhere;
+}
+
+.projectCard p {
+  font-size: var(--text-body);
+}
+
+.thumb {
+  position: relative;
+  flex: 1;
+  min-height: 8rem;
+  margin-top: 1rem;
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.thumb img {
+  object-fit: cover;
+  object-position: top;
+}
+
+.postRow {
+  display: grid;
+  grid-template-columns: minmax(8rem, 16rem) 1fr;
+  grid-template-areas:
+    "date title"
+    "date desc";
+  column-gap: 2rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.postRow:first-child {
+  border-top: 1px solid var(--line);
+}
+
+.postRow:hover h3 {
+  color: var(--link);
+  font-style: italic;
+}
+
+.postRow h3 {
+  grid-area: title;
+  font-size: var(--text-lead);
+}
+
+.postRow p {
+  grid-area: desc;
+  font-size: var(--text-body);
+  color: var(--muted);
+}
+
+.postRow .date {
+  grid-area: date;
+  padding-top: 0.6em;
+  font-size: clamp(0.7rem, 1vw, 0.95rem);
+  color: var(--muted);
+}
+
+@media (max-width: 700px) {
+  .postRow {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "date"
+      "title"
+      "desc";
+  }
+}

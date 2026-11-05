@@ -1,0 +1,18 @@
+{
+  "name": "lola sanchez",
+  "greeting": "hello! i'm",
+  "currently": "currently @ Hack Club",
+  "headline": {
+    "text": "technical lead of the",
+    "link": { "text": "Athena Initiative @ Hack Club", "href": "https://athena.hackclub.com" }
+  },
+  "about": [
+    "an 18 y/o programmer from nyc",
+    "i make art with code, terminal apps and websites"
+  ],
+  "contact": [
+    { "label": "github", "text": "lolasanchezz", "href": "https://github.com/lolasanchezz" },
+    { "label": "email", "text": "lola@hackclub.com", "href": "mailto:lola@hackclub.com" },
+    { "label": "linkedin", "text": "lola sanchez", "href": "https://linkedin.com/in/lola-sanchez-55193a31a" }
+  ]
+}

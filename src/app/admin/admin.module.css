@@ -1,0 +1,319 @@
+.page {
+  min-height: 100vh;
+  padding: 1.5rem var(--gutter) 4rem;
+  font-size: 1rem;
+}
+
+.page button,
+.page input,
+.page textarea {
+  font: inherit;
+  color: inherit;
+}
+
+.page button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.page h2 {
+  font-size: 2.25rem;
+  margin-top: 1rem;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.5rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.header h1 {
+  font-size: 3.5rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tabs button {
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  font-size: 1.1rem;
+}
+
+.tabs .active {
+  background: var(--lavender);
+  color: var(--accent);
+}
+
+.note {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+a.note:hover {
+  color: var(--link);
+  text-decoration: underline;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 16rem 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.sidebar {
+  position: sticky;
+  top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem;
+}
+
+.item > button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.item small {
+  color: var(--muted);
+}
+
+.item:hover,
+.item.active {
+  background: var(--lavender);
+}
+
+.item.active > button {
+  color: var(--accent);
+}
+
+.listButtons {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.listButtons button {
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 0.4rem;
+  color: var(--muted);
+}
+
+.listButtons button:hover {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.add,
+.inlineAdd {
+  cursor: pointer;
+  color: var(--link);
+}
+
+.add {
+  align-self: flex-start;
+  padding: 0.5rem 0.75rem;
+}
+
+.inlineAdd {
+  margin-left: 1rem;
+}
+
+.add:hover,
+.inlineAdd:hover {
+  text-decoration: underline;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.saveBar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  background: var(--background);
+}
+
+.saveBar button {
+  padding: 0.5rem 1.5rem;
+  border-radius: 999px;
+}
+
+.saveBar .save {
+  background: var(--accent) !important;
+  color: var(--background) !important;
+}
+
+.saveBar .discard {
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.saveBar .discard:hover {
+  color: var(--foreground);
+}
+
+.saveBar button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.row > * {
+  flex: 1 1 14rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.field > span {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 0.4rem;
+  background: var(--background);
+}
+
+.field textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+  border-color: transparent;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  flex: 0 1 auto !important;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid var(--lavender);
+  border-radius: 0.6rem;
+}
+
+.blockHead {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.blockHead > :first-child {
+  flex: 1;
+}
+
+.images {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: 1rem;
+}
+
+.images img {
+  width: 100%;
+  max-height: 14rem;
+  object-fit: contain;
+  background: var(--lavender);
+  border-radius: 0.4rem;
+}
+
+.markdown {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.markdown textarea {
+  min-height: 60vh;
+  height: 100%;
+  font-family: ui-monospace, monospace;
+  font-size: 0.9rem;
+}
+
+.preview {
+  padding: 1.5rem 0 1rem 1rem;
+  border-left: 1px solid var(--lavender);
+  font-size: 1.15rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid var(--lavender);
+}
+
+.danger {
+  color: #c0392b;
+  margin-left: auto;
+}
+
+.danger:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 800px) {
+  .split,
+  .markdown {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+  }
+}

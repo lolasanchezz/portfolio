@@ -1,0 +1,93 @@
+.page {
+  padding-bottom: 4rem;
+}
+
+.list {
+  padding: clamp(1.5rem, 4vw, 4rem) var(--gutter);
+}
+
+.empty {
+  font-size: var(--text-body);
+  color: var(--muted);
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: clamp(1.5rem, 4vw, 4rem) var(--gutter);
+  font-size: clamp(1.2rem, 1.6vw, 1.5rem);
+  line-height: 1.5;
+}
+
+.body > * + * {
+  margin-top: 1em;
+}
+
+.body h1,
+.body h2,
+.body h3 {
+  margin-top: 1.4em;
+  line-height: 1.1;
+}
+
+.body h1 {
+  font-size: 2.4em;
+}
+
+.body h2 {
+  font-size: 1.9em;
+}
+
+.body h3 {
+  font-size: 1.5em;
+}
+
+.body a {
+  color: var(--link);
+  font-style: italic;
+}
+
+.body a:hover {
+  text-decoration: underline;
+}
+
+.body ul,
+.body ol {
+  padding-left: 1.4em;
+}
+
+.body blockquote {
+  padding-left: 1em;
+  border-left: 3px solid var(--accent);
+  color: var(--muted);
+}
+
+.body code {
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 0.75em;
+  padding: 0.1em 0.3em;
+  background: var(--lavender);
+}
+
+.body pre {
+  padding: 1rem;
+  overflow-x: auto;
+  background: var(--lavender);
+}
+
+.body pre code {
+  padding: 0;
+  background: none;
+}
+
+.body img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+}
+
+.body hr {
+  border: none;
+  border-top: 1px solid var(--line);
+}

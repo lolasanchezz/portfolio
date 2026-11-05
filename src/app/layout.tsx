@@ -1,16 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Instrument_Serif } from "next/font/google";
+import Crawler from "./components/Crawler";
+import SmoothScroll from "./components/SmoothScroll";
+import VineCursor from "./components/VineCursor";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// big text (names, titles, the headline) - smaller text is roc grotesk from typekit
+const serif = Instrument_Serif({
+  variable: "--font-serif",
+  weight: "400",
+  style: ["normal", "italic"],
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// the "@" vine trail behind the cursor
+const VINES = false;
 
 export const metadata: Metadata = {
   title: "lola sanchez",
@@ -24,8 +28,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <head>
+        {/* roc grotesk comes from adobe fonts (typekit), not google */}
+        <link rel="stylesheet" href="https://use.typekit.net/hcp6cih.css" />
+      </head>
+      <body className={serif.variable}>
         {children}
+        {VINES && <VineCursor />}
+        <Crawler />
+        <SmoothScroll />
       </body>
     </html>
   );
